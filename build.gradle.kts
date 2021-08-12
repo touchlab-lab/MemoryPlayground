@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.5.30-M1"
+    kotlin("multiplatform") version "1.5.30-RC"
     id("com.android.library")
 }
 
@@ -9,6 +9,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     google()
     mavenCentral()
+    maven(url = "https://maven.pkg.jetbrains.space/public/p/kotlinx-coroutines/maven")
 }
 
 kotlin {
@@ -24,7 +25,12 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-new-mm-dev1")
+//                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
